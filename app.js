@@ -1,6 +1,8 @@
 var fs = require("fs");
 var inquire = require("inquirer");
 
+let renderFile = require("./render");
+
 function promptUser() {
     inquirer
         .prompt([{
