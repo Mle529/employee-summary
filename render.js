@@ -1,74 +1,71 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("fs")
+const path = require("path")
 
-const htmlTemp = "./templates/"
+const htmlTemplate = "./templates/"
 
-const employeeGen = require("./lib/Employee");
-const engineer = require("./lib/Engineer");
-const intern = require("./lib/Intern");
-const manager = require("./lib/Manager");
+const employeeGen = require("./lib/employee")
+const Engineer = require("./lib/engineer")
+const Intern = require("./lib/intern")
+const Manager = require("./lib/manager")
 let teamMembers = ""
 
 const renderManager = manager => {
-    let template = fs.readFileSync(path.resolve(htmlTemp, "manager.html"), "utf8");
-    let managerHTML = ""
+    let template = fs.readFileSync(path.resolve(htmlTemplate, "manager.html"), "utf8");
+    let managerHtml = ""
 
-    managerHTML = managerHTML + template.replace(/{{ name }}/g, manager.getName())
+    managerHtml = managerHtml + template.replace(/{{ name }}/g, manager.getName())
         .replace(/{{ role }}/g, manager.getRole())
         .replace(/{{ email }}/g, manager.getEmail())
-        .replace(/{{ id }}/g, manager.getID())
+        .replace(/{{ id }}/g, manager.getId())
         .replace(/{{ officeNumber }}/g, manager.getOfficeNumber())
-    teamMembers = teamMembers + managerHTML;
-    console.log(managerHTML)
+    teamMembers = teamMembers + managerHtml;
+    console.log(managerHtml)
 };
 const renderEngineer = engineer => {
-    let template = fs.readFileSync(path.resolve(htmlTemp, "engineer.html"), "utf8");
-    let engineerHTML = ""
+    let template = fs.readFileSync(path.resolve(htmlTemplate, "engineer.html"), "utf8");
+    let engineerHtml = ""
 
-    engineerHTML = engineerHTML + template.replace(/{{ name }}/g, engineer.getName())
+    engineerHtml = engineerHtml + template.replace(/{{ name }}/g, engineer.getName())
         .replace(/{{ role }}/g, engineer.getRole())
         .replace(/{{ email }}/g, engineer.getEmail())
-        .replace(/{{ id }}/g, engineer.getID())
+        .replace(/{{ id }}/g, engineer.getId())
         .replace(/{{ github }}/g, engineer.getGithub())
-    teamMembers = teamMembers + engineerHTML;
-    console.log(engineerHTML)
+    teamMembers = teamMembers + engineerHtml;
+    console.log(engineerHtml)
 };
 const renderIntern = intern => {
-    let template = fs.readFileSync(path.resolve(htmlTemp, "intern.html"), "utf8");
-    let internHTML = ""
+    let template = fs.readFileSync(path.resolve(htmlTemplate, "intern.html"), "utf8");
+    let internHtml = ""
 
-    internHTML = internHTML + template.replace(/{{ name }}/g, intern.getName())
+    internHtml = internHtml + template.replace(/{{ name }}/g, intern.getName())
         .replace(/{{ role }}/g, intern.getRole())
         .replace(/{{ email }}/g, intern.getEmail())
-        .replace(/{{ id }}/g, intern.getID())
+        .replace(/{{ id }}/g, intern.getId())
         .replace(/{{ school }}/g, intern.getSchool())
-    teamMembers = teamMembers + internHTML;
-    console.log(internHTML)
+    teamMembers = teamMembers + internHtml;
+    console.log(internHtml)
 };
 
 function createManager(name, id, email, officeNumber) {
     const manager = new Manager(name, id, email, officeNumber)
     renderManager(manager)
 }
-
 function createEngineer(name, id, email, github) {
     const engineer = new Engineer(name, id, email, github)
     renderEngineer(engineer)
 }
-
 function createIntern(name, id, email, school) {
     const intern = new Intern(name, id, email, school)
     renderIntern(intern)
 }
-
 function renderMain() {
-    let mainTemp = fs.readFileSync(path.resolve(htmlTemp, "main.html"), "utf8");
-    var mainHTML = ""
-    mainHTML = mainHTML + mainTemp.replace(/{{ team }}/g, teamMembers)
+    let mainTemplate = fs.readFileSync(path.resolve(htmlTemplate, "main.html"), "utf8");
+    var mainHtml = ""
+    mainHtml = mainHtml + mainTemplate.replace(/{{ team }}/g, teamMembers)
     let file = path.join(__dirname, 'output', "/team.html");
     console.log(file);
 
-    fs.writeFile(file, mainHTML, function (err) {
+    fs.writeFile(file, mainHtml, function (err) {
         if (err) {
             throw new Error(err)
         }
@@ -82,4 +79,3 @@ module.exports = {
     createIntern: createIntern,
     renderMain: renderMain
 }
-

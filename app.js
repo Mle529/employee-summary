@@ -1,7 +1,7 @@
-const fs = require("fs");
-const inquirer = require("inquirer");
+const fs = require("fs")
+const inquirer = require("inquirer")
 
-const renderFile = require("./render");
+let renderFile = require("./render")
 const generateManager = renderFile.createManager
 const generateEngineer = renderFile.createEngineer
 const generateIntern = renderFile.createIntern
@@ -50,7 +50,7 @@ function promptUser() {
                             }).then(
                                 function ({ github }) {
                                     generateEngineer(name, id, email, github)
-                                    addMembers()
+                                    addNewMembers()
                                 }
                             )
                         break
@@ -63,7 +63,7 @@ function promptUser() {
                             }).then(
                                 function ({ school }) {
                                     generateIntern(name, id, email, school)
-                                    addMembers()
+                                    addNewMembers()
                                 }
                             )
                         break
@@ -76,7 +76,7 @@ function promptUser() {
                             }).then(
                                 function ({ officeNumber }) {
                                     generateManager(name, id, email, officeNumber)
-                                    addMembers()
+                                    addNewMembers()
                                 }
                             )
                         break
@@ -84,15 +84,15 @@ function promptUser() {
                 }
             })
 }
-function addMembers() {
+function addNewMembers() {
     inquirer.prompt({
         type: "confirm",
         message: "Add more Team members?",
-        name: "addMembers"
+        name: "addNewMembers"
     }).then(
-        function ({ addMembers }) {
-            console.log("add members", addMembers)
-            if (addMembers) {
+        function ({ addNewMembers }) {
+            console.log("add members", addNewMembers)
+            if (addNewMembers) {
                 promptUser()
             } else {
                 renderHTML()
