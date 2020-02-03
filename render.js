@@ -1,8 +1,9 @@
 var fs = require("fs");
 var path = require("path");
 
-var htmlTemp = "./htmlTemplates/"
+var htmlTemp = "./templates/"
 
+const employeeGen = require("./lib/employee");
 const engineer = require("./lib/engineer");
 const intern = require("./lib/intern");
 const manager = require("./lib/manager");
@@ -16,7 +17,7 @@ const renderManager = manager => {
         .replace(/{{ role }}/g, manager.getRole())
         .replace(/{{ email }}/g, manager.getEmail())
         .replace(/{{ id }}/g, manager.getID())
-        .replace(/{{ officeNum }}/g, manager.getofficeNum())
+        .replace(/{{ officeNumber }}/g, manager.getOfficeNumber())
     teamMembers = teamMembers + managerHTML;
     console.log(managerHTML)
 };
@@ -28,7 +29,7 @@ const renderEngineer = engineer => {
         .replace(/{{ role }}/g, engineer.getRole())
         .replace(/{{ email }}/g, engineer.getEmail())
         .replace(/{{ id }}/g, engineer.getID())
-        .replace(/{{ github }}/g, engineer.getofficeNum())
+        .replace(/{{ github }}/g, engineer.getGithub())
     teamMembers = teamMembers + engineerHTML;
     console.log(engineerHTML)
 };
@@ -40,13 +41,13 @@ const renderIntern = intern => {
         .replace(/{{ role }}/g, intern.getRole())
         .replace(/{{ email }}/g, intern.getEmail())
         .replace(/{{ id }}/g, intern.getID())
-        .replace(/{{ school }}/g, intern.getofficeNum())
+        .replace(/{{ school }}/g, intern.getSchool())
     teamMembers = teamMembers + internHTML;
     console.log(internHTML)
 };
 
-function createManager(name, id, email, officeNum) {
-    const manager = new Manager(name, id, email, officeNum)
+function createManager(name, id, email, officeNumber) {
+    const manager = new Manager(name, id, email, officeNumber)
     renderManager(manager)
 }
 

@@ -1,7 +1,11 @@
 var fs = require("fs");
-var inquire = require("inquirer");
+var inquirer = require("inquirer");
 
 let renderFile = require("./render");
+const generateManager = renderFile.createManager
+const generateEngineer = renderFile.createEngineer
+const generateIntern = renderFile.createIntern
+const renderHTML = renderFile.renderMain
 
 function promptUser() {
     inquirer
@@ -38,7 +42,7 @@ function promptUser() {
             function ({ name, id, email, role }) {
                 switch (role) {
                     case "Engineer":
-                        inquire
+                        inquirer
                             .prompt({
                                 type: "input",
                                 message: "What is your Github username?",
@@ -70,8 +74,8 @@ function promptUser() {
                                 message: "What is your office number?",
                                 name: "office"
                             }).then(
-                                function ({ officeNum }) {
-                                    generateManager(name, id, email, officeNum)
+                                function ({ officeNumber }) {
+                                    generateManager(name, id, email, officeNumber)
                                     addMembers()
                                 }
                             )
