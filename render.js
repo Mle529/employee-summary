@@ -1,12 +1,12 @@
-var fs = require("fs");
-var path = require("path");
+const fs = require("fs");
+const path = require("path");
 
-var htmlTemp = "./templates/"
+const htmlTemp = "./templates/"
 
-const employeeGen = require("./lib/employee");
-const engineer = require("./lib/engineer");
-const intern = require("./lib/intern");
-const manager = require("./lib/manager");
+const employeeGen = require("./lib/Employee");
+const engineer = require("./lib/Engineer");
+const intern = require("./lib/Intern");
+const manager = require("./lib/Manager");
 let teamMembers = ""
 
 const renderManager = manager => {
@@ -65,7 +65,7 @@ function renderMain() {
     let mainTemp = fs.readFileSync(path.resolve(htmlTemp, "main.html"), "utf8");
     var mainHTML = ""
     mainHTML = mainHTML + mainTemp.replace(/{{ team }}/g, teamMembers)
-    let file = path.join(__dirname, 'output', "/index.html");
+    let file = path.join(__dirname, 'output', "/team.html");
     console.log(file);
 
     fs.writeFile(file, mainHTML, function (err) {
