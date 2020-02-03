@@ -70,8 +70,8 @@ function promptUser() {
                                 message: "What is your office number?",
                                 name: "office"
                             }).then(
-                                function ({ office }) {
-                                    generateManager(name, id, email, office)
+                                function ({ officeNum }) {
+                                    generateManager(name, id, email, officeNum)
                                     addMembers()
                                 }
                             )
